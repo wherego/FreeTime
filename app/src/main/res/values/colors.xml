@@ -27,4 +27,7 @@
 
     <color name="cycle_image_bg">#44222222</color>
 
+    <!--首页分割线-->
+    <color name="colorHomeLine">#D4D4D4</color>
+
 </resources>

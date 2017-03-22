@@ -76,6 +76,7 @@ public abstract class BaseFragment extends Fragment {
         });
 
         //showLoading();  //别在这调用,没用...一下子就执行了;
+        // TODO: 2017/3/22 0022  
         showContentView();
     }
 

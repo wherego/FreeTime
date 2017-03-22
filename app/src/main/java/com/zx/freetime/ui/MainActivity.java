@@ -17,11 +17,16 @@ import android.widget.Toast;
 
 import com.zx.freetime.R;
 import com.zx.freetime.adapter.MyFragmentPagerAdapter;
+import com.zx.freetime.rx.RxBus;
+import com.zx.freetime.rx.RxBusBaseMessage;
+import com.zx.freetime.rx.RxCodeConstants;
 import com.zx.freetime.ui.chat.ChatFragment;
 import com.zx.freetime.ui.news.NewsFragment;
 import com.zx.freetime.ui.picture.PictureFragment;
 
 import java.util.ArrayList;
+
+import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
     private FrameLayout llTitleMenu;
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initContentFragment();
         initDrawerLayout();
         initListener();
+        initRxBus();
     }
 
     private void initView() {
@@ -229,5 +235,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void initRxBus() {
+        RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TO_PARENT, RxBusBaseMessage.class)
+                .subscribe(new Action1<RxBusBaseMessage>() {
+                    @Override
+                    public void call(RxBusBaseMessage msg) {
+                        vpContent.setCurrentItem(msg.getCode());
+                    }
+                });
     }
 }
