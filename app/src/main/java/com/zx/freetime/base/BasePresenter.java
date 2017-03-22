@@ -7,4 +7,5 @@ package com.zx.freetime.base;
  */
 
 public interface BasePresenter {
+    void start();
 }

@@ -14,6 +14,9 @@ import android.widget.RelativeLayout;
 
 import com.zx.freetime.R;
 
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
+
 /**
  * Created by zhangxin on 2017/3/22 0022.
  * <p>
@@ -38,6 +41,11 @@ public abstract class BaseFragment extends Fragment {
     private AnimationDrawable mAnimationDrawable;
 
     private ImageView img;
+
+
+    //rx部分,用来收集所有的subscriber(订阅者),接下来在Activity onPause或者onDestroy时候统一取消订阅，避免造成内存泄漏
+    //移除订阅之后,就不能再订阅了,除非是重新创建一个该对象;
+    private CompositeSubscription mCompositeSubscription;
 
     @Nullable
     @Override
@@ -77,7 +85,7 @@ public abstract class BaseFragment extends Fragment {
 
         //showLoading();  //别在这调用,没用...一下子就执行了;
         // TODO: 2017/3/22 0022  
-        showContentView();
+        //showContent();
     }
 
     /**
@@ -110,7 +118,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 加载完成的状态,加载中==>gone;动画播放停止;无法加载==>gone; bindingView显示出来...
      */
-    public void showContentView() {
+    public void showContent() {
         if (mLlProgressBar.getVisibility() != View.GONE) {
             mLlProgressBar.setVisibility(View.GONE);
         }
@@ -145,5 +153,23 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    public void addSubscription(Subscription s) {
+        if (this.mCompositeSubscription == null) {
+            this.mCompositeSubscription = new CompositeSubscription();
+        }
+        this.mCompositeSubscription.add(s);
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        removeSubscription();
+    }
+
+
+    public void removeSubscription() {
+        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
+            this.mCompositeSubscription.unsubscribe();
+        }
+    }
 }
