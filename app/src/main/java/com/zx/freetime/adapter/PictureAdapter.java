@@ -2,6 +2,7 @@ package com.zx.freetime.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +15,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zx.freetime.R;
 import com.zx.freetime.ui.picture.DetailPictureActivity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by zhangxin on 2016/10/28.
@@ -24,10 +28,10 @@ import java.util.List;
 
 public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureHolder> {
 
-    private List<String> mItems;
+    private ArrayList<String> mItems;
     private Context mContext;
 
-    public PictureAdapter(Context context, List<String> items) {
+    public PictureAdapter(Context context, ArrayList<String> items) {
         super();
         mItems = items;
         mContext = context;
@@ -41,7 +45,7 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureH
     }
 
     @Override
-    public void onBindViewHolder(PictureHolder holder, int position) {
+    public void onBindViewHolder(PictureHolder holder, final int position) {
         final String url = mItems.get(position);
         Log.e("###", "============onBindViewHolder url: " + url);
         Glide.with(mContext)
@@ -53,9 +57,16 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureH
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                /*Intent intent = new Intent();
                 intent.setClass(mContext, DetailPictureActivity.class);
                 intent.putExtra("url", url);
+                mContext.startActivity(intent);*/
+                //###########################################
+                Bundle bundle = new Bundle();
+                bundle.putInt("index", position);//第几张
+                bundle.putStringArrayList("imageuri", mItems);
+                Intent intent = new Intent(mContext, DetailPictureActivity.class);
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });

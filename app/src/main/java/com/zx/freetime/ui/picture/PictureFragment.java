@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 public class PictureFragment extends BaseFragment implements PictureContract.View {
-    public List<String> mUrls = new ArrayList<>(); //刚一开始是空的;
+    public ArrayList<String> mUrls = new ArrayList<>(); //刚一开始是空的;
     private XRecyclerView mRecyclerView;
     private PictureAdapter mAdapter;
     PictureContract.Presenter mPresenter;
