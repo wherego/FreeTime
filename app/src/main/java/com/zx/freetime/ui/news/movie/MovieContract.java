@@ -1,0 +1,31 @@
+package com.zx.freetime.ui.news.movie;
+
+import com.zx.freetime.base.BasePresenter;
+import com.zx.freetime.base.BaseView;
+import com.zx.freetime.bean.movie.SubjectsBean;
+import com.zx.freetime.ui.picture.PictureFragment;
+
+import java.util.List;
+
+/**
+ * Created by zhangxin on 2016/11/26.
+ * <p>
+ * Description :
+ */
+
+public interface MovieContract {
+    interface View extends BaseView {
+        void load(List<SubjectsBean> datas);
+
+        void showErrorView();
+
+        void showNormalView();
+
+        //用来订阅;
+        PictureFragment getFragment();
+    }
+
+    interface Presenter extends BasePresenter {
+        void getMovie();
+    }
+}
