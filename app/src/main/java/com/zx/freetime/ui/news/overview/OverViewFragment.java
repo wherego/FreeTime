@@ -56,6 +56,7 @@ public class OverViewFragment extends BaseFragment {
         initHeader();
         init();
         mXRecyclerView.setAdapter(mAdapter);
+        showContent();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class OverViewFragment extends BaseFragment {
         //设置选中和未选中时的图片
         mZBanner.setIndicators(R.drawable.ad_select, R.drawable.ad_unselect);
         //设置轮播间隔时间
-        mZBanner.setDelay(2000);
+        mZBanner.setDelay(3000);
         initData();//初始化list;
         mZBanner.setData(mList, new ZBanner.ImageCycleViewListener() {
             @Override

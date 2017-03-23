@@ -1,5 +1,7 @@
 package com.zx.freetime.http;
 
+import com.zx.freetime.bean.movie.HotMovieBean;
+import com.zx.freetime.bean.picture.PictureBean;
 import com.zx.freetime.bean.technews.AndroidNewsBean;
 
 import retrofit2.http.GET;
@@ -22,4 +24,19 @@ public interface Api {
      */
     @GET("{pre_page}/{page}")
     Observable<AndroidNewsBean> getAndroidNews(@Path("page") int page, @Path("pre_page") int pre_page);
+
+    /*
+       * 用来获取美图的api
+       * page:服务器的第几页,如果你想获取最新的图片,那么就设置为1吧
+       * pre_page:你希望这次请求返回几张图片的url,服务器显示最多的50个,一般我们在调用的时候设为20;
+       * */
+    @GET("{pre_page}/{page}")
+    Observable<PictureBean> getPicture(@Path("page") int page, @Path("pre_page") int pre_page);
+
+
+    /**
+     * 豆瓣热映电影，每日更新
+     */
+    @GET("v2/movie/in_theaters")
+    Observable<HotMovieBean> getHotMovie();
 }

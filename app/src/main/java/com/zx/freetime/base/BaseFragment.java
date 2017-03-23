@@ -60,6 +60,7 @@ public abstract class BaseFragment extends Fragment {
         img = (ImageView) baseView.findViewById(R.id.img_progress);
         // 加载动画
         mAnimationDrawable = (AnimationDrawable) img.getDrawable();
+        //showLoading(); //先showloading吧;
         //NOTE:不知道这一步有没有问题;
         View contentView = inflater.inflate(getFragmentContent(), null);
         initContentView(contentView);
