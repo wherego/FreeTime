@@ -146,4 +146,9 @@ public class OverViewFragment extends BaseFragment {
         mList.add(new ZBannerBean("图灵机器人",
                 "http://imgsrc.baidu.com/forum/pic/item/261bee0a19d8bc3e6db92913828ba61eaad345d4.jpg"));
     }
+
+    //TODO:首页并没有执行网络操作,所以直接显示,覆盖父类的...
+    @Override
+    protected void loadData() {
+    }
 }

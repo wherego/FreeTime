@@ -3,7 +3,6 @@ package com.zx.freetime.ui.news.movie;
 import com.zx.freetime.base.BasePresenter;
 import com.zx.freetime.base.BaseView;
 import com.zx.freetime.bean.movie.SubjectsBean;
-import com.zx.freetime.ui.picture.PictureFragment;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public interface MovieContract {
         void showNormalView();
 
         //用来订阅;
-        PictureFragment getFragment();
+        MovieFragment getFragment();
     }
 
     interface Presenter extends BasePresenter {

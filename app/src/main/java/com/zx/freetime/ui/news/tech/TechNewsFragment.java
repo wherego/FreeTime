@@ -37,7 +37,7 @@ public class TechNewsFragment extends BaseFragment implements TechNewsContract.V
         showLoading();
 
         mPresenter = new TechNewsPresenter(this);
-        mPresenter.start();
+//        mPresenter.start();
     }
 
     private void initRecyclerView() {
@@ -95,5 +95,11 @@ public class TechNewsFragment extends BaseFragment implements TechNewsContract.V
     @Override
     public TechNewsFragment getFragment() {
         return this;
+    }
+
+    @Override
+    protected void loadData() {
+        super.loadData();
+        mPresenter.start();
     }
 }

@@ -36,7 +36,7 @@ public class PictureFragment extends BaseFragment implements PictureContract.Vie
         showLoading();
 
         mPresenter = new PicturePresenter(this);
-        mPresenter.start();
+//        mPresenter.start();
     }
 
     @Override
@@ -85,14 +85,21 @@ public class PictureFragment extends BaseFragment implements PictureContract.Vie
 
     @Override
     public void showNormalView() {
-        showContent();
         //NOTE:特别注意:这是在收集收据结束之后回到的,所以,请务必执行
         mRecyclerView.refreshComplete();
         mAdapter.notifyDataSetChanged();
+        //
+        showContent();
     }
 
     @Override
     public PictureFragment getFragment() {
         return this;
+    }
+
+    @Override
+    protected void loadData() {
+        super.loadData();
+        mPresenter.start();
     }
 }

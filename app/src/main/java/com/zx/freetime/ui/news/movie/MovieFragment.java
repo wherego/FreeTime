@@ -34,7 +34,7 @@ public class MovieFragment extends BaseFragment implements MovieContract.View {
 
         //初始化数据
         mPresenter = new MoviePresenter(this);//让Presenter持有了view;
-        mPresenter.start();
+//        mPresenter.start();
     }
 
     @Override
@@ -67,7 +67,13 @@ public class MovieFragment extends BaseFragment implements MovieContract.View {
     }
 
     @Override
-    public PictureFragment getFragment() {
-        return null;
+    public MovieFragment getFragment() {
+        return this;
+    }
+
+    @Override
+    protected void loadData() {
+        super.loadData();
+        mPresenter.start();
     }
 }
