@@ -15,14 +15,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpUtils {
     private static final String API_ANDROIDNEWS = "http://gank.io/api/data/Android/";
-    private static final String API_PICTURE =     "http://gank.io/api/data/福利/";
+    private static final String API_PICTURE = "http://gank.io/api/data/福利/";
     private static final String API_MOVIEW = "https://api.douban.com/";
     private static final String API_TOP = "http://v.juhe.cn/";
+    private static final String API_CHAT = "http://op.juhe.cn/";
 
     private static Api AndroidNewClient;
     private static Api PictureClient;
     private static Api MovieClient;
     private static Api TopNewsClient;
+    private static Api ChatClient;
+
     private static HttpUtils sHttpUtils;  //用一个单利吧...
 
 
@@ -82,7 +85,7 @@ public class HttpUtils {
     }
 
 
-    public Api getTopNewClient(){
+    public Api getTopNewClient() {
         if (TopNewsClient == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(API_TOP)
@@ -92,6 +95,19 @@ public class HttpUtils {
             TopNewsClient = retrofit.create(Api.class);
         }
         return TopNewsClient;
+    }
+
+
+    public Api getChatClient() {
+        if (ChatClient == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://op.juhe.cn/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
+            ChatClient = retrofit.create(Api.class);
+        }
+        return ChatClient;
     }
 
     public void setContext(Context context) {

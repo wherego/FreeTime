@@ -1,5 +1,6 @@
 package com.zx.freetime.http;
 
+import com.zx.freetime.bean.chat.ChatBean;
 import com.zx.freetime.bean.movie.HotMovieBean;
 import com.zx.freetime.bean.picture.PictureBean;
 import com.zx.freetime.bean.technews.AndroidNewsBean;
@@ -7,6 +8,7 @@ import com.zx.freetime.bean.topnews.TopNewsBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -46,4 +48,12 @@ public interface Api {
     Observable<HotMovieBean> getHotMovie();
 
 
+    /***
+     * 图灵机器人,使用的是聚合的API;
+     * @param text
+     * @param key
+     * @return
+     */
+    @GET("robot/index?")
+    Observable<ChatBean> talk(@Query("info") String text, @Query("key") String key);
 }
