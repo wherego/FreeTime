@@ -3,9 +3,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/tv"
-        android:text="头条"
+    <com.zx.freetime.widget.ZRecyclerView.XRecyclerView
+        android:id="@+id/top_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

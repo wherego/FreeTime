@@ -2,7 +2,6 @@ package com.zx.freetime.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 import com.zx.freetime.R;
 
 import java.util.ArrayList;
-
-import static com.zx.freetime.R.id.tv;
 
 /**
  * Created by zhangxin on 2017/3/22 0022.

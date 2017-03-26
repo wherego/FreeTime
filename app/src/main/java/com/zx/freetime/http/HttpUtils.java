@@ -10,16 +10,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by zhangxin 2016/10/28.
  * <p>
  * Description :
+ * NOTE:感觉API的获取有点问题....
  */
 
 public class HttpUtils {
     private static final String API_ANDROIDNEWS = "http://gank.io/api/data/Android/";
     private static final String API_PICTURE =     "http://gank.io/api/data/福利/";
     private static final String API_MOVIEW = "https://api.douban.com/";
+    private static final String API_TOP = "http://v.juhe.cn/";
 
     private static Api AndroidNewClient;
     private static Api PictureClient;
     private static Api MovieClient;
+    private static Api TopNewsClient;
     private static HttpUtils sHttpUtils;  //用一个单利吧...
 
 
@@ -78,6 +81,18 @@ public class HttpUtils {
         return MovieClient;
     }
 
+
+    public Api getTopNewClient(){
+        if (TopNewsClient == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(API_TOP)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
+            TopNewsClient = retrofit.create(Api.class);
+        }
+        return TopNewsClient;
+    }
 
     public void setContext(Context context) {
         this.context = context;

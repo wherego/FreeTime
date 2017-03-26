@@ -3,6 +3,7 @@ package com.zx.freetime.bean.topnews;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * Description :
  */
 
-public class TopNewsResult {
+public class TopNewsResult implements Serializable {
     private String stat;
 
     private List<TopNewsItem> data = null;

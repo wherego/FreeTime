@@ -3,6 +3,7 @@ package com.zx.freetime.http;
 import com.zx.freetime.bean.movie.HotMovieBean;
 import com.zx.freetime.bean.picture.PictureBean;
 import com.zx.freetime.bean.technews.AndroidNewsBean;
+import com.zx.freetime.bean.topnews.TopNewsBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -15,6 +16,10 @@ import rx.Observable;
  */
 
 public interface Api {
+
+    @GET("toutiao/index?type=top&key=dc087d711c303a78873c604ff888c32f")
+    Observable<TopNewsBean> getTopNews();
+
     /**
      * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
      * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
@@ -39,4 +44,6 @@ public interface Api {
      */
     @GET("v2/movie/in_theaters")
     Observable<HotMovieBean> getHotMovie();
+
+
 }

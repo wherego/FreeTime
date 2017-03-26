@@ -3,22 +3,24 @@ package com.zx.freetime.bean.topnews;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangxin on 2017/3/26 0026.
  * <p>
  * Description :
  */
 
-public class TopNewsItem {
+public class TopNewsItem implements Serializable {
     private String uniquekey;
     private String title;
     private String date;
     private String category;
-    private String authorName;
-    private String url;
-    private String thumbnailPicS;
-    private String thumbnailPicS02;
-    private String thumbnailPicS03;
+    private String author_name;
+    private String url;  //注意啊,这个URL是内容详情不是封面url;
+    private String thumbnail_pic_s;
+    private String thumbnail_pic_s02;
+    private String thumbnail_pic_s03;
 
     public String getUniquekey() {
         return uniquekey;
@@ -52,12 +54,12 @@ public class TopNewsItem {
         this.category = category;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getAuthor_name() {
+        return author_name;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
     }
 
     public String getUrl() {
@@ -68,27 +70,33 @@ public class TopNewsItem {
         this.url = url;
     }
 
-    public String getThumbnailPicS() {
-        return thumbnailPicS;
+    public String getThumbnail_pic_s() {
+        return thumbnail_pic_s;
     }
 
-    public void setThumbnailPicS(String thumbnailPicS) {
-        this.thumbnailPicS = thumbnailPicS;
+    public void setThumbnail_pic_s(String thumbnail_pic_s) {
+        this.thumbnail_pic_s = thumbnail_pic_s;
     }
 
-    public String getThumbnailPicS02() {
-        return thumbnailPicS02;
+    public String getThumbnail_pic_s02() {
+        return thumbnail_pic_s02;
     }
 
-    public void setThumbnailPicS02(String thumbnailPicS02) {
-        this.thumbnailPicS02 = thumbnailPicS02;
+    public void setThumbnail_pic_s02(String thumbnail_pic_s02) {
+        this.thumbnail_pic_s02 = thumbnail_pic_s02;
     }
 
-    public String getThumbnailPicS03() {
-        return thumbnailPicS03;
+    public String getThumbnail_pic_s03() {
+        return thumbnail_pic_s03;
     }
 
-    public void setThumbnailPicS03(String thumbnailPicS03) {
-        this.thumbnailPicS03 = thumbnailPicS03;
+    public void setThumbnail_pic_s03(String thumbnail_pic_s03) {
+        this.thumbnail_pic_s03 = thumbnail_pic_s03;
+    }
+
+    @Override
+    public String toString() {
+
+        return title + "-" + date + "-" + author_name;
     }
 }

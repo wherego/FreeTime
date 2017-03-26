@@ -30,4 +30,8 @@
     <!--首页分割线-->
     <color name="colorHomeLine">#D4D4D4</color>
 
+    <color name="text_color">#f6000000</color>
+    <color name="text_source">#732b2828</color>
+    <color name="content_placeholder">#ffe0e0e0</color>
+
 </resources>

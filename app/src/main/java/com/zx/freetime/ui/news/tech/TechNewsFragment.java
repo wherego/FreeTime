@@ -33,11 +33,7 @@ public class TechNewsFragment extends BaseFragment implements TechNewsContract.V
     public void initContentView(View contentView) {
         mRecyclerView = (XRecyclerView) contentView.findViewById(R.id.tech_rv);
         initRecyclerView();
-
-        showLoading();
-
         mPresenter = new TechNewsPresenter(this);
-//        mPresenter.start();
     }
 
     private void initRecyclerView() {

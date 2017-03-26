@@ -24,9 +24,11 @@ public class Constants {
     // 缓存妹子
     public static String GANK_MEIZI = "gank_meizi";*/
 
-    // 新闻缓存的Key
-    public static String TECH_NEWS_ALL = "news_all";
+    // 科技新闻缓存的Key
+    public static String TECH_NEWS_ALL = "tech_news_all";
 
+    // 科技新闻缓存的Key
+    public static String TOP_NEWS_ALL = "top_news_all";
 
     // 电影栏头部的图片
     public static final String ONE_URL_01 = "http://ojyz0c8un.bkt.clouddn.com/one_01.png";

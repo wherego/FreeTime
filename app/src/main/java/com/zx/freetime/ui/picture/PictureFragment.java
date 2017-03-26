@@ -32,11 +32,7 @@ public class PictureFragment extends BaseFragment implements PictureContract.Vie
     public void initContentView(View contentView) {
         mRecyclerView = (XRecyclerView) contentView.findViewById(R.id.pic_rv);
         initRecyclerView();
-
-        showLoading();
-
         mPresenter = new PicturePresenter(this);
-//        mPresenter.start();
     }
 
     @Override
