@@ -92,6 +92,9 @@
 
     </LinearLayout>
 
+    <View
+        style="@style/horizontalLine"
+        android:layout_marginLeft="10dp"/>
 
     <LinearLayout
         android:id="@+id/ll_nav_homepage"
@@ -119,6 +122,10 @@
 
     </LinearLayout>
 
+    <View
+        style="@style/horizontalLine"
+        android:layout_marginLeft="10dp"/>
+
     <LinearLayout
         android:id="@+id/ll_nav_deedback"
         android:layout_width="match_parent"
@@ -144,6 +151,10 @@
             android:textSize="15sp"/>
 
     </LinearLayout>
+
+    <View
+        style="@style/horizontalLine"
+        android:layout_marginLeft="10dp"/>
 
     <LinearLayout
         android:id="@+id/ll_nav_about"
@@ -172,9 +183,13 @@
     </LinearLayout>
 
     <View
+        style="@style/horizontalLine"
+        android:layout_marginLeft="10dp"/>
+
+    <!--<View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#e0e0e0"
-        android:visibility="gone"/>
+        android:visibility="gone"/>-->
 
 </LinearLayout>

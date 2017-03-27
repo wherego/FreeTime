@@ -9,7 +9,7 @@
         android:id="@+id/img_left"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/t1"/>
+        android:src="@drawable/avatar"/>
 
     <TextView
         android:id="@+id/left_chat_tv"

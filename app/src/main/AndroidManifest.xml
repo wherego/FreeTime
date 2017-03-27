@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".ui.menu.NavDeedBackActivity">
         </activity>
+        <activity android:name=".ui.menu.NavAboutActivity">
+        </activity>
     </application>
 
 </manifest>

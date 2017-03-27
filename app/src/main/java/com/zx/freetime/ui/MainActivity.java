@@ -1,6 +1,9 @@
 package com.zx.freetime.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -8,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -22,9 +24,11 @@ import com.zx.freetime.rx.RxBus;
 import com.zx.freetime.rx.RxBusBaseMessage;
 import com.zx.freetime.rx.RxCodeConstants;
 import com.zx.freetime.ui.chat.ChatFragment;
+import com.zx.freetime.ui.menu.NavAboutActivity;
 import com.zx.freetime.ui.menu.NavDeedBackActivity;
 import com.zx.freetime.ui.news.NewsFragment;
 import com.zx.freetime.ui.picture.PictureFragment;
+import com.zx.freetime.widget.ZCircleImageView.CircleImageDrawable;
 
 import java.util.ArrayList;
 
@@ -74,8 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View headerView = navView.getHeaderView(0);
 
         ImageView ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
-        //展示原型图标,现在先不展示;
-        //ImgLoadUtil.displayCircle(ivAvatar, ConstantsImageUrl.IC_AVATAR);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
+        ivAvatar.setImageDrawable(new CircleImageDrawable(bitmap));
+
         LinearLayout llNavSetting = (LinearLayout) headerView.findViewById(R.id.ll_nav_setting);
         LinearLayout llNavHomepage = (LinearLayout) headerView.findViewById(R.id.ll_nav_homepage);
         LinearLayout llNavDeedback = (LinearLayout) headerView.findViewById(R.id.ll_nav_deedback);
@@ -169,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        NavDownloadActivity.start(MainActivity.this);
+//                        NavSettingActivity.start(MainActivity.this);
                     }
                 }, 360);
                 break;
@@ -187,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        NavAboutActivity.start(MainActivity.this);
+                        NavAboutActivity.start(MainActivity.this);
                     }
                 }, 360);
                 break;
