@@ -18,6 +18,7 @@
         android:layout_toLeftOf="@id/img_right"
         android:background="@drawable/message_right"
         android:gravity="center_vertical"
+        android:textColor="@color/skin_item_text_color"
         android:textSize="20sp"/>
 
 
