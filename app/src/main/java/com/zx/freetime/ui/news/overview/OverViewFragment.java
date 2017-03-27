@@ -85,8 +85,26 @@ public class OverViewFragment extends BaseFragment {
                 if (mZBanner.isCycle()) {
                     position = position - 1;
                 }
-                Toast.makeText(getActivity(), bean.getTitle() +
-                        "选择了--" + position, Toast.LENGTH_LONG).show();
+               /* Toast.makeText(getActivity(), bean.getTitle() +
+                        "选择了--" + position, Toast.LENGTH_LONG).show();*/
+                switch (position) {
+                    case 0: //跳转到今日头条;
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_SUB,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_TOP, null));
+                        break;
+                    case 1://跳转到热门电影
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_SUB,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_MOVIE, null));
+                        break;
+                    case 2://跳转到精美图片
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_PARENT,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_PICTURE, null));
+                        break;
+                    case 3://跳转到聊天机器人
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_PARENT,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_TULING, null));
+                        break;
+                }
             }
         });
         mXRecyclerView.setPullRefreshEnabled(false);

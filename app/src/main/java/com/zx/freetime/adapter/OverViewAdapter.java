@@ -9,7 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zx.freetime.R;
+import com.zx.freetime.rx.RxBus;
+import com.zx.freetime.rx.RxBusBaseMessage;
+import com.zx.freetime.rx.RxCodeConstants;
 
 import java.util.ArrayList;
 
@@ -65,14 +70,34 @@ public class OverViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (position == 0) {
                 holder2.tv_title.setText("今日头条");
                 holder2.img_title.setImageResource(R.drawable.home_title_top);
+                holder2.img1.setImageResource(R.drawable.huoying1);
+                holder2.tv1.setText("");
+                holder2.img2.setImageResource(R.drawable.huoying2);
+                holder2.tv2.setText("");
+                holder2.ll_more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_SUB,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_TOP, null));
+                    }
+                });
             } else if (position == 1) {
                 holder2.tv_title.setText("科技范儿");
                 holder2.img_title.setImageResource(R.drawable.home_title_android);
+
+                holder2.img1.setImageResource(R.drawable.huoying3);
+                holder2.tv1.setText("");
+                holder2.img2.setImageResource(R.drawable.huoying4);
+                holder2.tv2.setText("");
+                holder2.ll_more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_SUB,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_TECH, null));
+                    }
+                });
             }
-            holder2.img1.setImageResource(R.drawable.home_title_meizi);
-            holder2.tv1.setText("111111111");
-            holder2.img2.setImageResource(R.drawable.home_title_meizi);
-            holder2.tv2.setText("222222222");
+
 
         } else {
             OverViewOneHolder holder1 = (OverViewOneHolder) holder;
@@ -81,17 +106,40 @@ public class OverViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 holder1.img_title.setImageResource(R.drawable.home_title_movie);
                 holder1.img1.setImageResource(R.drawable.home_movie);
                 holder1.tv1.setText("全球热门电影尽在其中O(∩_∩)O~");
+                holder1.ll_more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_SUB,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_MOVIE, null));
+                    }
+                });
             } else if (position == 3) {
                 //使用缓存吧;
                 holder1.tv_title.setText("精美图片");
                 holder1.img_title.setImageResource(R.drawable.home_title_meizi);
-                holder1.img1.setImageResource(R.drawable.home_chat);
+                //NOTE:有一个硬编码;
+                Glide.with(mContext).load("http://img2.3lian.com/2014/c7/25/d/40.jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder1.img1);
                 holder1.tv1.setText("给你的双眼一次放松吧");
+                holder1.ll_more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_PARENT,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_PICTURE, null));
+                    }
+                });
             } else if (position == 4) {
                 holder1.tv_title.setText("实在无聊");
                 holder1.img_title.setImageResource(R.drawable.home_title_app);
                 holder1.img1.setImageResource(R.drawable.home_chat);
                 holder1.tv1.setText("图灵机器人陪你度过闲暇时间");
+                holder1.ll_more.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RxBus.getDefault().post(RxCodeConstants.JUMP_TO_PARENT,
+                                new RxBusBaseMessage(RxCodeConstants.JUMP_TO_TULING, null));
+                    }
+                });
             }
         }
     }
@@ -118,6 +166,7 @@ public class OverViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             img1 = (ImageView) itemView.findViewById(R.id.iv_one_photo);
             tv1 = (TextView) itemView.findViewById(R.id.tv_one_photo_title);
+
         }
     }
 
@@ -144,6 +193,7 @@ public class OverViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             img2 = (ImageView) itemView.findViewById(R.id.iv_two_one_two);
             tv2 = (TextView) itemView.findViewById(R.id.tv_two_one_two_title);
+
         }
     }
 

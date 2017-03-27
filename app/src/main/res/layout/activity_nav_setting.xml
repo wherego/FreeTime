@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="夜间模式"
+                android:text="夜间模式(测试功能)"
                 android:textColor="@color/skin_item_text_color"
                 android:textSize="25sp"/>
 
