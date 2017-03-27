@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".ui.menu.NavAboutActivity">
         </activity>
+        <activity android:name=".ui.menu.NavSettingActivity">
+        </activity>
     </application>
 
 </manifest>

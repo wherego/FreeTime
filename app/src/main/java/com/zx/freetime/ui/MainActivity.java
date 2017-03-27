@@ -26,6 +26,7 @@ import com.zx.freetime.rx.RxCodeConstants;
 import com.zx.freetime.ui.chat.ChatFragment;
 import com.zx.freetime.ui.menu.NavAboutActivity;
 import com.zx.freetime.ui.menu.NavDeedBackActivity;
+import com.zx.freetime.ui.menu.NavSettingActivity;
 import com.zx.freetime.ui.news.NewsFragment;
 import com.zx.freetime.ui.picture.PictureFragment;
 import com.zx.freetime.widget.ZCircleImageView.CircleImageDrawable;
@@ -160,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        NavHomePageActivity.startHome(MainActivity.this);
                         Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
                         intent.putExtra("url", "https://github.com/zachaxy/FreeTime");
                         startActivity(intent);
@@ -169,12 +169,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
 
-            case R.id.ll_nav_setting://扫码下载
+            case R.id.ll_nav_setting://个性设置界面
                 drawerLayout.closeDrawer(GravityCompat.START);
                 drawerLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        NavSettingActivity.start(MainActivity.this);
+                        NavSettingActivity.start(MainActivity.this);
                     }
                 }, 360);
                 break;
