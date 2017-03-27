@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPageBg"
     android:orientation="vertical">
-
+    <!--    android:background="@color/colorPageBg"
+    -->
     <LinearLayout
         android:id="@+id/ll_header_bg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
-        android:background="@drawable/ic_nav_bg_drawerlayout"
+        android:background="@drawable/ic_nav_bg_drawerlayout_header"
         android:gravity="bottom"
         android:orientation="vertical"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
@@ -43,7 +43,7 @@
                     android:id="@+id/tv_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="用户已注销"
+                    android:text="zachaxy"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorWhite"
                     android:textSize="17sp"/>
@@ -66,10 +66,37 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_nav_homepage"
+        android:id="@+id/ll_nav_setting"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/ripple_one_item_bg"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_nav_setting"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="个性设置"
+            android:textColor="@color/colorContent"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_nav_homepage"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:background="@drawable/ripple_one_item_bg"
         android:clickable="true"
         android:gravity="center_vertical"
@@ -92,33 +119,6 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/ll_nav_scan_download"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/ripple_one_item_bg"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_nav_homepage"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="扫码下载"
-            android:textColor="@color/colorContent"
-            android:textSize="15sp"/>
-
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/ll_nav_deedback"
         android:layout_width="match_parent"
@@ -133,7 +133,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_nav_homepage"/>
+            android:src="@drawable/ic_nav_deedback"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -159,13 +159,13 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic_nav_homepage"/>
+            android:src="@drawable/ic_nav_about"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="关于云阅"
+            android:text="个人简介"
             android:textColor="@color/colorContent"
             android:textSize="15sp"/>
 

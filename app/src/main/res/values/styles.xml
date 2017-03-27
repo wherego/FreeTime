@@ -29,4 +29,14 @@
         <item name="android:textSize">9.0sp</item>
         <item name="android:textColor">#99ffffff</item>
     </style>
+
+
+    <!--水平分隔线-->
+    <style name="horizontalLine">
+        <item name="android:background">@color/colorLineItem</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <color name="colorLineItem">#FFDDDDDD</color>
 </resources>

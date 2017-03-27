@@ -19,9 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorPageBg"
+        android:background="@drawable/skin_main_bg"
         android:clickable="true"
         android:fitsSystemWindows="true"/>
+    <!-- android:background="@color/colorPageBg"-->
+
 
     <!--不在这里初始化了,改在代码中进行初始化-->
     <!--app:headerLayout="@layout/nav_header_main"-->

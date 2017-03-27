@@ -29,6 +29,8 @@
         <activity android:name=".ui.WebViewActivity"/>
         <activity android:name=".ui.picture.DetailPictureActivity">
         </activity>
+        <activity android:name=".ui.menu.NavDeedBackActivity">
+        </activity>
     </application>
 
 </manifest>

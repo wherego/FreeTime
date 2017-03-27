@@ -7,4 +7,5 @@
     <string name="refreshing">正在刷新...</string>
     <string name="refresh_done">刷新完成...</string>
     <string name="listview_header_last_time">上次更新时间：</string>
+    <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
 </resources>

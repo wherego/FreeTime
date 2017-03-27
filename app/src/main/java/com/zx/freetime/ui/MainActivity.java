@@ -1,5 +1,6 @@
 package com.zx.freetime.ui;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +22,7 @@ import com.zx.freetime.rx.RxBus;
 import com.zx.freetime.rx.RxBusBaseMessage;
 import com.zx.freetime.rx.RxCodeConstants;
 import com.zx.freetime.ui.chat.ChatFragment;
+import com.zx.freetime.ui.menu.NavDeedBackActivity;
 import com.zx.freetime.ui.news.NewsFragment;
 import com.zx.freetime.ui.picture.PictureFragment;
 
@@ -74,12 +76,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageView ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
         //展示原型图标,现在先不展示;
         //ImgLoadUtil.displayCircle(ivAvatar, ConstantsImageUrl.IC_AVATAR);
+        LinearLayout llNavSetting = (LinearLayout) headerView.findViewById(R.id.ll_nav_setting);
         LinearLayout llNavHomepage = (LinearLayout) headerView.findViewById(R.id.ll_nav_homepage);
-        LinearLayout llNavScanDownload = (LinearLayout) headerView.findViewById(R.id.ll_nav_scan_download);
         LinearLayout llNavDeedback = (LinearLayout) headerView.findViewById(R.id.ll_nav_deedback);
         LinearLayout llNavAbout = (LinearLayout) headerView.findViewById(R.id.ll_nav_about);
         llNavHomepage.setOnClickListener(this);
-        llNavScanDownload.setOnClickListener(this);
+        llNavSetting.setOnClickListener(this);
         llNavDeedback.setOnClickListener(this);
         llNavAbout.setOnClickListener(this);
     }
@@ -148,23 +150,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     vpContent.setCurrentItem(2);
                 }
                 break;
-           /* case R.id.ll_nav_homepage:// 主页
+            case R.id.ll_nav_homepage:// 主页
                 drawerLayout.closeDrawer(GravityCompat.START);
                 drawerLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        NavHomePageActivity.startHome(MainActivity.this);
+//                        NavHomePageActivity.startHome(MainActivity.this);
+                        Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                        intent.putExtra("url", "https://github.com/zachaxy/FreeTime");
+                        startActivity(intent);
                     }
                 }, 360);
 
                 break;
 
-            case R.id.ll_nav_scan_download://扫码下载
+            case R.id.ll_nav_setting://扫码下载
                 drawerLayout.closeDrawer(GravityCompat.START);
                 drawerLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        NavDownloadActivity.start(MainActivity.this);
+//                        NavDownloadActivity.start(MainActivity.this);
                     }
                 }, 360);
                 break;
@@ -177,15 +182,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }, 360);
                 break;
-            case R.id.ll_nav_about:// 关于云阅
+            case R.id.ll_nav_about:// 关于自己
                 drawerLayout.closeDrawer(GravityCompat.START);
                 drawerLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        NavAboutActivity.start(MainActivity.this);
+//                        NavAboutActivity.start(MainActivity.this);
                     }
                 }, 360);
-                break;*/
+                break;
             default:
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     Toast.makeText(MainActivity.this, "暂时还未完成,回收抽屉", Toast.LENGTH_LONG).show();
