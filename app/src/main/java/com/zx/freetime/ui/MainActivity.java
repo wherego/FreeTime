@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.zx.freetime.R;
 import com.zx.freetime.adapter.MyFragmentPagerAdapter;
+import com.zx.freetime.base.BaseSkinActivity;
 import com.zx.freetime.rx.RxBus;
 import com.zx.freetime.rx.RxBusBaseMessage;
 import com.zx.freetime.rx.RxCodeConstants;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 
 import rx.functions.Action1;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseSkinActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
     private FrameLayout llTitleMenu;
 
     private DrawerLayout drawerLayout;

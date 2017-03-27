@@ -413,7 +413,7 @@ public class TimeUtil {
 
 
     /**
-     * 获取当天日期
+     * 获取当天日期 年 月 日
      */
     public static ArrayList<String> getTodayTime() {
         String data = TimeUtil.getData();
@@ -426,5 +426,17 @@ public class TimeUtil {
         list.add(month);
         list.add(day);
         return list;
+    }
+
+
+    public static String getTodayTimeStamp() {
+        ArrayList<String> list = getTodayTime();
+        StringBuilder sb = new StringBuilder();
+        sb.append(list.get(0));
+        sb.append("-");
+        sb.append(list.get(1));
+        sb.append("-");
+        sb.append(list.get(2));
+        return sb.toString();
     }
 }

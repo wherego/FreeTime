@@ -63,10 +63,8 @@ public class AndroidNewsModel {
 
     /***
      * 从缓存中获取新闻,这是在没有网络的情况下执行的,其实也很无奈,毕竟后台不是咱自己写的,所以只能用这种逻辑来处理了;
-     *
-     * @param name
      */
-    public void getNewsFromCache(String name, final RequestImpl request) {
+    public void getNewsFromCache( final RequestImpl request) {
         Log.e("###", "执行getNewsFromCache");
 /*        HttpUtils.getInstance().getAndroidNewClient()
                 .getAndroidNews(page, per_page)

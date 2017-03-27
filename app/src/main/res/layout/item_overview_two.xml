@@ -32,7 +32,7 @@
                 android:id="@+id/iv_two_one_one"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop"/>
 
             <!--android:background="@drawable/img_two_bi_one"-->
 
@@ -45,13 +45,13 @@
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@color/colorContent"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
         </LinearLayout>
 
         <View
             android:layout_width="7dp"
             android:layout_height="match_parent"
-            android:background="@color/colorPageBg" />
+            android:background="@color/colorPageBg"/>
 
         <LinearLayout
             android:id="@+id/ll_two_one_two"
@@ -64,7 +64,7 @@
                 android:id="@+id/iv_two_one_two"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/tv_two_one_two_title"
@@ -76,7 +76,7 @@
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@color/colorContent"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
         </LinearLayout>
 
     </LinearLayout>

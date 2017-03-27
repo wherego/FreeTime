@@ -26,6 +26,6 @@ public class TechNewsContract {
 
     interface Presenter extends BasePresenter {
         void getTechNewsFromNet(int page);
-        void getTechNewsFromCache(String cacheName);
+        void getTechNewsFromCache();
     }
 }

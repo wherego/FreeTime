@@ -63,7 +63,7 @@ public class TechNewsFragment extends BaseFragment implements TechNewsContract.V
     @Override
     public void onRefresh() {
         //这个方法可能不行....
-        mPresenter.getTechNewsFromCache(Constants.TECH_NEWS_ALL);
+        mPresenter.getTechNewsFromCache();
     }
 
 

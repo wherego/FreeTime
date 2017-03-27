@@ -1,6 +1,7 @@
 package com.zx.freetime.http;
 
 import com.zx.freetime.bean.chat.ChatBean;
+import com.zx.freetime.bean.historytoday.HistoryTodayBean;
 import com.zx.freetime.bean.movie.HotMovieBean;
 import com.zx.freetime.bean.picture.PictureBean;
 import com.zx.freetime.bean.technews.AndroidNewsBean;
@@ -56,4 +57,8 @@ public interface Api {
      */
     @GET("robot/index?")
     Observable<ChatBean> talk(@Query("info") String text, @Query("key") String key);
+
+
+    @GET("api/history")
+    Observable<HistoryTodayBean> getHistory();
 }

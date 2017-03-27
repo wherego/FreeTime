@@ -30,6 +30,10 @@ public class Constants {
     // 科技新闻缓存的Key
     public static String TOP_NEWS_ALL = "top_news_all";
 
+    public static String HISTORY_ALL = "history_all";
+
+    public static String TODAY = "today";       //作为保存当天的key,避免historyToday重复执行网络请求;
+
     // 电影栏头部的图片
     public static final String ONE_URL_01 = "http://ojyz0c8un.bkt.clouddn.com/one_01.png";
 

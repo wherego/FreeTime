@@ -19,12 +19,14 @@ public class HttpUtils {
     private static final String API_MOVIEW = "https://api.douban.com/";
     private static final String API_TOP = "http://v.juhe.cn/";
     private static final String API_CHAT = "http://op.juhe.cn/";
+    private static final String API_HISTORY = "http://history.lifetime.photo:81/";
 
     private static Api AndroidNewClient;
     private static Api PictureClient;
     private static Api MovieClient;
     private static Api TopNewsClient;
     private static Api ChatClient;
+    private static Api HistoryClient;
 
     private static HttpUtils sHttpUtils;  //用一个单利吧...
 
@@ -101,13 +103,26 @@ public class HttpUtils {
     public Api getChatClient() {
         if (ChatClient == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://op.juhe.cn/")
+                    .baseUrl(API_CHAT)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
             ChatClient = retrofit.create(Api.class);
         }
         return ChatClient;
+    }
+
+
+    public Api getHistoryClient() {
+        if (HistoryClient == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(API_HISTORY)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
+            HistoryClient = retrofit.create(Api.class);
+        }
+        return HistoryClient;
     }
 
     public void setContext(Context context) {
