@@ -24,8 +24,17 @@
 
 # 效果展示
 
-<img width="320" height=“590” src="https://github.com/zachaxy/HotNews/blob/master/screenshot/GIF.gif"></img>
+<img width="173" height=“274” src="https://github.com/zachaxy/FreeTime/blob/master/screenshot/GIF.gif"></img>
 
+----------------------------------
+
+
+
+<img width="173" height=“274” src="https://github.com/zachaxy/FreeTime/blob/master/screenshot/p1.jpg"></img>
+<img width="173" height=“274” src="https://github.com/zachaxy/FreeTime/blob/master/screenshot/p2.jpg"></img>
+<img width="173" height=“274” src="https://github.com/zachaxy/FreeTime/blob/master/screenshot/p3.jpg"></img>
+<img width="173" height=“274” src="https://github.com/zachaxy/FreeTime/blob/master/screenshot/p4.jpg"></img>
+<img width="173" height=“274” src="https://github.com/zachaxy/FreeTime/blob/master/screenshot/p5.jpg"></img>
 
 
 #  所使用的第三方库
