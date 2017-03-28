@@ -31,7 +31,7 @@ public class WowSplashView extends View {
     private Path mTowerDst; //没什么特别的,就是创建了一个path
     private Paint mPaint;       //画笔
     private boolean isAnimateEnd;       //动画是否结束;
-    private String mTitle = "AndroidWing";  //无关痛痒;
+    private String mTitle = "休闲时光";  //在splash页面显示的产品名称;
 
     public static final float SCALE = 2f;  //扩大倍数;
     public static float translateX;    //水平移动距离;

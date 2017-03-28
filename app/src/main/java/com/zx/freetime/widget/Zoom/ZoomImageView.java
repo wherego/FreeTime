@@ -395,14 +395,24 @@ public class ZoomImageView extends ImageView implements
                     getParent().requestDisallowInterceptTouchEvent(false);
                 }*/
 
-                if (rectf.left==0||rectf.right==getWidth()){
+               /* if (rectf.left==0||rectf.right==getWidth()){  //如果显示的是边界的话,就交给viewpager来处理;
                     getParent().requestDisallowInterceptTouchEvent(false);
-                }else {
+                }else {//其他情况,要求父容器不要拦截,事件交给该zoomImage才处理;
                     getParent().requestDisallowInterceptTouchEvent(true);
-                }
+                }*/
                 // 注意:当手指不停在屏幕上滑动时,其实是有顿挫感的,每顿挫一次就会触发一次onTouch的方法,因此该x值的实时改变的.
                 float dx = x - mLastX;
                 float dy = y - mLastY;
+
+                if (rectf.left == 0 && rectf.right == getWidth()) {//还没有进行缩放,left和right都有显示,那么不拦
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                } else if (rectf.left == 0 && dx > 0) {  //如果显示的是边界的话,就交给viewpager来处理;
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                } else if (rectf.right == getWidth() && dx < 0) {
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                } else {//其他情况,要求父容器不要拦截,事件交给该zoomImage才处理;
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                }
 
                 if (!isCanDrag) {
                     isCanDrag = isMoveAction(dx, dy);
