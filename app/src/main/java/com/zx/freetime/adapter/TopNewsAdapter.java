@@ -1,5 +1,6 @@
 package com.zx.freetime.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +19,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zx.freetime.R;
 import com.zx.freetime.bean.topnews.TopNewsItem;
 import com.zx.freetime.ui.WebViewActivity;
+import com.zx.freetime.ui.news.movie.detail.MovieDetailActivity;
+import com.zx.freetime.ui.news.top.detail.TopNewsDetailActivity;
 
 import java.util.List;
 
@@ -29,9 +33,9 @@ import java.util.List;
 
 public class TopNewsAdapter extends RecyclerView.Adapter<TopNewsAdapter.TopNewsHolder> {
     private List<TopNewsItem> mItems;
-    private Context mContext;
+    private Activity mContext;
 
-    public TopNewsAdapter(Context context, List<TopNewsItem> items) {
+    public TopNewsAdapter(Activity context, List<TopNewsItem> items) {
         mContext = context;
         mItems = items;
     }
@@ -43,24 +47,32 @@ public class TopNewsAdapter extends RecyclerView.Adapter<TopNewsAdapter.TopNewsH
     }
 
     @Override
-    public void onBindViewHolder(TopNewsHolder holder, int position) {
-        TopNewsItem bean = mItems.get(position);
+    public void onBindViewHolder(final TopNewsHolder holder, int position) {
+        final TopNewsItem bean = mItems.get(position);
         Log.e("###", bean.toString());
         holder.textView.setText(bean.getTitle());
         holder.sourceTextview.setText(bean.getAuthor_name());
         Glide.with(mContext)
                 .load(bean.getThumbnail_pic_s())
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView);
 
         final String url = bean.getUrl();//这个才是详情页...
+
+        holder.itemView.setScaleX(0.8f);
+        holder.itemView.setScaleY(0.8f);
+
+        holder.itemView.animate().scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+        holder.itemView.animate().scaleY(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+
         holder.topNewsItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                /* Intent intent = new Intent(mContext, WebViewActivity.class);
                 intent.putExtra("url", url);
                 mContext.startActivity(intent);*/
-                WebViewActivity.loadUrl(v.getContext(), url, "加载中...");
+//                WebViewActivity.loadUrl(v.getContext(), url, "加载中...");
+                TopNewsDetailActivity.start(mContext, bean, holder.imageView);
             }
         });
     }

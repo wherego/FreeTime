@@ -187,7 +187,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
 
     static class MovieHolder extends RecyclerView.ViewHolder {
-        View itemView;
+        //View itemView;
 
         LinearLayout movieItem;
         ImageView moviePic;
@@ -199,7 +199,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         public MovieHolder(View itemView) {
             super(itemView);
-            this.itemView = itemView;
+            //this.itemView = itemView;
             movieItem = (LinearLayout) itemView.findViewById(R.id.ll_one_item);
             moviePic = (ImageView) itemView.findViewById(R.id.iv_one_photo);
             movieName = (TextView) itemView.findViewById(R.id.tv_one_title);
