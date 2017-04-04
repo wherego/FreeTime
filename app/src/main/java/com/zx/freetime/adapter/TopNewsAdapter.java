@@ -57,9 +57,10 @@ public class TopNewsAdapter extends RecyclerView.Adapter<TopNewsAdapter.TopNewsH
         holder.topNewsItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
+               /* Intent intent = new Intent(mContext, WebViewActivity.class);
                 intent.putExtra("url", url);
-                mContext.startActivity(intent);
+                mContext.startActivity(intent);*/
+                WebViewActivity.loadUrl(v.getContext(), url, "加载中...");
             }
         });
     }
