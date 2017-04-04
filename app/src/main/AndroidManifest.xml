@@ -35,6 +35,10 @@
         </activity>
         <activity android:name=".ui.menu.NavSettingActivity">
         </activity>
+        <activity android:name=".base.BaseHeaderActivity">
+        </activity>
+        <activity android:name=".ui.news.movie.detail.MovieDetailActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.zx.freetime.http;
 import com.zx.freetime.bean.chat.ChatBean;
 import com.zx.freetime.bean.historytoday.HistoryTodayBean;
 import com.zx.freetime.bean.movie.HotMovieBean;
+import com.zx.freetime.bean.movie.MovieDetailBean;
 import com.zx.freetime.bean.picture.PictureBean;
 import com.zx.freetime.bean.technews.AndroidNewsBean;
 import com.zx.freetime.bean.topnews.TopNewsBean;
@@ -47,6 +48,16 @@ public interface Api {
      */
     @GET("v2/movie/in_theaters")
     Observable<HotMovieBean> getHotMovie();
+
+
+    /**
+     * 获取电影详情
+     *
+     * @param id 电影bean里的id
+     */
+    @GET("/v2/movie/subject/{id}")
+    Observable<MovieDetailBean> getMovieDetail(@Path("id") String id);
+
 
 
     /***

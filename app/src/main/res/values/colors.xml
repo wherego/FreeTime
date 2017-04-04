@@ -39,4 +39,10 @@
     <color name="text_common">#191919</color>
 
     <color name="skin_item_text_color">#191919</color>
+
+
+    <!--电影评分-->
+    <color name="colorRateRed">#FB5B81</color>
+
+
 </resources>

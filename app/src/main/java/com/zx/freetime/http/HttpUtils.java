@@ -21,12 +21,16 @@ public class HttpUtils {
     private static final String API_CHAT = "http://op.juhe.cn/";
     private static final String API_HISTORY = "http://history.lifetime.photo:81/";
 
+    private final static String API_MOVIEW_DETAILE = "https://api.douban.com";
+
+
     private static Api AndroidNewClient;
     private static Api PictureClient;
     private static Api MovieClient;
     private static Api TopNewsClient;
     private static Api ChatClient;
     private static Api HistoryClient;
+    private static Api MovieDetailClient;
 
     private static HttpUtils sHttpUtils;  //用一个单利吧...
 
@@ -124,6 +128,19 @@ public class HttpUtils {
         }
         return HistoryClient;
     }
+
+    public Api getMovieDetailClient() {
+        if (MovieDetailClient == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(API_MOVIEW_DETAILE)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
+            MovieDetailClient = retrofit.create(Api.class);
+        }
+        return MovieDetailClient;
+    }
+
 
     public void setContext(Context context) {
         this.context = context;
