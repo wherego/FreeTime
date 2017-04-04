@@ -47,15 +47,6 @@ public class MovieDetailActivity extends BaseHeaderActivity {
     private SubjectsBean subjectsBean;
     private String mMoreUrl;
     private String mMovieName;
-    // 这个是高斯图背景的高度
-    private int imageBgHeight;
-    // 滑动多少距离后标题不透明
-    private int slidingDistance;
-
-    private ImageView imgLoading;
-    private AnimationDrawable loagdingDrawable;
-    private LinearLayout loadError;
-    private LinearLayout loadProgress;
 
     private ImageView imgItemBg;
     private ImageView imgOnePhoto;
@@ -64,131 +55,29 @@ public class MovieDetailActivity extends BaseHeaderActivity {
     private TextView tvOneDirector;
     private TextView tvOneCasts;
     private TextView tvOneGenres;
-
     private TextView tvOneDay;
     private TextView tvOneCity;
-    private RecyclerView rvCast;
-    private Toolbar tbBaseTitle;
-    private ImageView ivBaseTitlebarBg;
 
+
+    private RecyclerView rvCast;
     private TextView tvOneTitle;
     private TextView tvOneSummary;
-
-    private MovieDetailAdapter mAdapter;
-
-    private Subscription subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_movie_detail);
-
-        setToolBar();
-
+//        setContentView(R.layout.activity_movie_detail2);
         if (getIntent() != null) {
             subjectsBean = (SubjectsBean) getIntent().getSerializableExtra("bean");
             initHeader();
         }
 
-
-//        initRecyclerView();
-
-        initSlideShapeTheme();
-
-        setTitles();
+        initSlideShapeTheme(setHeaderImgUrl(), setHeaderImageView());
+        setTitle(subjectsBean.getTitle());
+        setSubTitle(String.format("主演：%s", StringFormatUtil.formatName(subjectsBean.getCasts())));
 
         loadMovieDetail();
     }
-
-
-    @Override
-    protected void intiView() {
-        Log.e("###", "开始初始化view");
-        imgItemBg = (ImageView) findViewById(R.id.img_item_bg);
-        tbBaseTitle = (Toolbar) findViewById(R.id.tb_base_title);
-        ivBaseTitlebarBg = (ImageView) findViewById(R.id.iv_base_titlebar_bg);
-        loadProgress = (LinearLayout) findViewById(R.id.ll_progress_bar);
-        loadError = (LinearLayout) findViewById(R.id.ll_error_refresh);
-
-        //进入的时候先启动加载动画
-        imgLoading = (ImageView) findViewById(R.id.img_progress);
-        loagdingDrawable = (AnimationDrawable) imgLoading.getDrawable();
-        if (!loagdingDrawable.isRunning()) {
-            loagdingDrawable.start();
-        }
-
-        if (headerView != null) {
-            imgOnePhoto = (ImageView) headerView.findViewById(R.id.iv_one_photo);
-            tvOneRattingRate = (TextView) headerView.findViewById(R.id.tv_one_rating_rate);
-            tvOneRatingNumber = (TextView) headerView.findViewById(R.id.tv_one_rating_number);
-            tvOneDirector = (TextView) headerView.findViewById(R.id.tv_one_directors);
-            tvOneCasts = (TextView) headerView.findViewById(R.id.tv_one_casts);
-            tvOneGenres = (TextView) headerView.findViewById(R.id.tv_one_genres);
-            tvOneDay = (TextView) headerView.findViewById(R.id.tv_one_day);
-            tvOneCity = (TextView) headerView.findViewById(R.id.tv_one_city);
-        }
-
-        if (contentView != null) {
-            Log.e("###", "初始化content中的view");
-            tvOneTitle = (TextView) contentView.findViewById(R.id.tv_one_title);
-            tvOneSummary = (TextView) contentView.findViewById(R.id.tv_one_summary);
-            rvCast = (RecyclerView) contentView.findViewById(R.id.xrv_cast);
-            if (rvCast == null) {
-                Log.e("###", "RecyclerView是null");
-            }
-        }
-
-
-    }
-
-    @Override
-    protected int getHeaderLayout() {
-        return R.layout.movie_header;
-    }
-
-    @Override
-    protected int getContentLayout() {
-        return R.layout.movie_content;
-    }
-
-
-    void initRecyclerView() {
-        rvCast.setVisibility(View.VISIBLE);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(MovieDetailActivity.this);
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvCast.setLayoutManager(mLayoutManager);
-
-        // 需加，不然滑动不流畅
-        rvCast.setNestedScrollingEnabled(false);
-//        rvCast.setHasFixedSize(false);
-
-        mAdapter = new MovieDetailAdapter();
-        rvCast.setAdapter(mAdapter);
-    }
-
-    /**
-     * 设置toolbar
-     */
-    protected void setToolBar() {
-        setSupportActionBar(tbBaseTitle);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            //去除默认Title显示
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-        // 手动设置才有效果
-        tbBaseTitle.setTitleTextAppearance(this, R.style.ToolBar_Title);
-        tbBaseTitle.setSubtitleTextAppearance(this, R.style.Toolbar_SubTitle);
-        tbBaseTitle.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-//        setTitles();
-    }
-
     private void initHeader() {
         //加载电影图片;
         Glide.with(imgOnePhoto.getContext())
@@ -216,25 +105,76 @@ public class MovieDetailActivity extends BaseHeaderActivity {
                 .into(imgItemBg);
     }
 
-    void loadMovieDetail() {
-        subscription = HttpUtils.getInstance().getMovieDetailClient().getMovieDetail(subjectsBean.getId())
+
+    @Override
+    protected void initHeaderView(View headerView) {
+        if (headerView != null) {
+            imgItemBg = (ImageView) headerView.findViewById(R.id.img_item_bg);
+            imgOnePhoto = (ImageView) headerView.findViewById(R.id.iv_one_photo);
+            tvOneRattingRate = (TextView) headerView.findViewById(R.id.tv_one_rating_rate);
+            tvOneRatingNumber = (TextView) headerView.findViewById(R.id.tv_one_rating_number);
+            tvOneDirector = (TextView) headerView.findViewById(R.id.tv_one_directors);
+            tvOneCasts = (TextView) headerView.findViewById(R.id.tv_one_casts);
+            tvOneGenres = (TextView) headerView.findViewById(R.id.tv_one_genres);
+            tvOneDay = (TextView) headerView.findViewById(R.id.tv_one_day);
+            tvOneCity = (TextView) headerView.findViewById(R.id.tv_one_city);
+        }
+    }
+
+    @Override
+    protected void initContentView(View contentView) {
+        if (contentView != null) {
+            Log.e("###", "初始化content中的view");
+            tvOneTitle = (TextView) contentView.findViewById(R.id.tv_one_title);
+            tvOneSummary = (TextView) contentView.findViewById(R.id.tv_one_summary);
+            rvCast = (RecyclerView) contentView.findViewById(R.id.xrv_cast);
+            if (rvCast == null) {
+                Log.e("###", "RecyclerView是null");
+            }
+        }
+    }
+
+    @Override
+    protected int getContentLayout() {
+        return R.layout.activity_movie_detail;
+    }
+
+    @Override
+    protected int getHeaderLayout() {
+        return R.layout.header_slide_shape;
+    }
+
+    @Override
+    protected String setHeaderImgUrl() {
+        if (subjectsBean == null) {
+            return "";
+        }
+        return subjectsBean.getImages().getMedium();
+    }
+
+    @Override
+    protected ImageView setHeaderImageView() {
+        return imgItemBg;
+    }
+
+
+    private void loadMovieDetail() {
+        Subscription get = HttpUtils.getInstance().getMovieDetailClient().getMovieDetail(subjectsBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MovieDetailBean>() {
                     @Override
                     public void onCompleted() {
-                        showContent();
+                        showContentView();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
                         showError();
                     }
 
                     @Override
                     public void onNext(final MovieDetailBean movieDetailBean) {
-                        //这是UI线程;
                         // 上映日期
                         tvOneDay.setText(String.format("上映日期：%s", movieDetailBean.getYear()));
                         // 制片国家
@@ -247,192 +187,42 @@ public class MovieDetailActivity extends BaseHeaderActivity {
                         mMoreUrl = movieDetailBean.getAlt();
                         mMovieName = movieDetailBean.getTitle();
 
-//                        initHeader();
-
-                        //transformData(movieDetailBean);
-                        for (int i = 0; i < movieDetailBean.getDirectors().size(); i++) {
-                            movieDetailBean.getDirectors().get(i).setType("导演");
-                        }
-                        for (int i = 0; i < movieDetailBean.getCasts().size(); i++) {
-                            movieDetailBean.getCasts().get(i).setType("演员");
-                        }
-                        mAdapter = new MovieDetailAdapter();
-                        mAdapter.addAll(movieDetailBean.getDirectors());
-                        mAdapter.addAll(movieDetailBean.getCasts());
-
-                        setAdapter(mAdapter);
+                        transformData(movieDetailBean);
                     }
                 });
     }
 
 
-    protected void setTitles() {
-//        Log.e("###", "setTitles: " + subjectsBean.getTitle());
-        tbBaseTitle.setTitle(subjectsBean.getTitle());
-        tbBaseTitle.setSubtitle(String.format("主演：%s", StringFormatUtil.formatName(subjectsBean.getCasts())));
-    }
-
-    void showContent() {
-        if (loagdingDrawable.isRunning()) {
-            loagdingDrawable.stop();
-        }
-
-        if (loadProgress.getVisibility() != View.GONE) {
-            loadProgress.setVisibility(View.GONE);
-        }
-        if (loadError.getVisibility() != View.GONE) {
-            loadError.setVisibility(View.GONE);
-        }
-
-        if (headContainer.getVisibility() != View.VISIBLE) {
-            headContainer.setVisibility(View.VISIBLE);
-        }
-
-        if (contentContainer.getVisibility() != View.VISIBLE) {
-            contentContainer.setVisibility(View.VISIBLE);
-        }
-
-//        mAdapter.notifyDataSetChanged();
-    }
-
-    void showError() {
-        if (loagdingDrawable.isRunning()) {
-            loagdingDrawable.stop();
-        }
-
-        if (loadProgress.getVisibility() != View.GONE) {
-            loadProgress.setVisibility(View.GONE);
-        }
-        if (loadError.getVisibility() != View.VISIBLE) {
-            loadError.setVisibility(View.VISIBLE);
-        }
-
-        if (headContainer.getVisibility() != View.GONE) {
-            headContainer.setVisibility(View.GONE);
-        }
-
-        if (contentContainer.getVisibility() != View.GONE) {
-            contentContainer.setVisibility(View.GONE);
-        }
-    }
-
-    void initSlideShapeTheme() {
-        //设置title栏的背景;
-        setImgHeaderBg();
-
-        // toolbar 的高
-        int toolbarHeight = tbBaseTitle.getLayoutParams().height;
-        final int headerBgHeight = toolbarHeight + StatusBarUtil.getStatusBarHeight(this);
-
-        // 使背景图向上移动到图片的最低端，保留（titlebar+statusbar）的高度
-        ViewGroup.LayoutParams params = ivBaseTitlebarBg.getLayoutParams();
-        ViewGroup.MarginLayoutParams ivTitleHeadBgParams = (ViewGroup.MarginLayoutParams) ivBaseTitlebarBg
-                .getLayoutParams();
-        int marginTop = params.height - headerBgHeight;
-        ivTitleHeadBgParams.setMargins(0, -marginTop, 0, 0);
-
-        ivBaseTitlebarBg.setImageAlpha(0);
-        StatusBarUtils.setTranslucentImageHeader(this, 0, tbBaseTitle);
-
-        // 上移背景图片，使空白状态栏消失(这样下方就空了状态栏的高度)
-        if (imgItemBg != null) {
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) imgItemBg.getLayoutParams();
-            layoutParams.setMargins(0, -StatusBarUtil.getStatusBarHeight(this), 0, 0);
-
-            ViewGroup.LayoutParams imgItemBgparams = imgItemBg.getLayoutParams();
-            // 获得高斯图背景的高度
-            imageBgHeight = imgItemBgparams.height;
-        }
-
-        // 变色
-        initScrollViewListener();
-        initNewSlidingParams();
-    }
-
     /**
-     * 加载titlebar背景
+     * 异步线程转换数据
      */
-    private void setImgHeaderBg() {
-        if (subjectsBean == null) {
-            return;
-        }
-        String imgUrl = subjectsBean.getImages().getMedium();
-        Log.e("###", "拿到的url" + imgUrl);
-        if (!TextUtils.isEmpty(imgUrl)) {
-
-            // 高斯模糊背景 原来 参数：12,5  23,4
-            Glide.with(this).load(imgUrl)
-                    // .placeholder(R.drawable.stackblur_default)
-                    .error(R.drawable.stackblur_default)
-                    .bitmapTransform(new BlurTransformation(this, 23, 4))
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean
-                                isFirstResource) {
-                            e.printStackTrace();
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable>
-                                target,
-                                                       boolean isFromMemoryCache, boolean isFirstResource) {
-                            tbBaseTitle.setBackgroundColor(Color.TRANSPARENT);
-                            ivBaseTitlebarBg.setImageAlpha(0);
-                            ivBaseTitlebarBg.setVisibility(View.VISIBLE);
-                            return false;
-                        }
-                    }).into(ivBaseTitlebarBg);
-        }
-    }
-
-    private void initScrollViewListener() {
-        // 为了兼容23以下
-        ((NestedScrollView) findViewById(R.id.mns_base)).setOnScrollChangeListener(new NestedScrollView
-                .OnScrollChangeListener() {
+    private void transformData(final MovieDetailBean movieDetailBean) {
+        new Thread(new Runnable() {
             @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                scrollChangeHeader(scrollY);
-            }
-        });
-    }
+            public void run() {
+                for (int i = 0; i < movieDetailBean.getDirectors().size(); i++) {
+                    movieDetailBean.getDirectors().get(i).setType("导演");
+                }
+                for (int i = 0; i < movieDetailBean.getCasts().size(); i++) {
+                    movieDetailBean.getCasts().get(i).setType("演员");
+                }
 
-    private void initNewSlidingParams() {
-        int titleBarAndStatusHeight = (int) (CommonUtils.getDimens(R.dimen.nav_bar_height) + StatusBarUtil
-                .getStatusBarHeight(this));
-        // 减掉后，没到顶部就不透明了
-        slidingDistance = imageBgHeight - titleBarAndStatusHeight - (int) (CommonUtils.getDimens(R.dimen
-                .base_header_activity_slide_more));
+                MovieDetailActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setAdapter(movieDetailBean);
+                    }
+                });
+            }
+        }).start();
     }
 
     /**
-     * 根据页面滑动距离改变Header方法
+     * 设置导演&演员adapter
      */
-    private void scrollChangeHeader(int scrolledY) {
-        if (scrolledY < 0) {
-            scrolledY = 0;
-        }
-        float alpha = Math.abs(scrolledY) * 1.0f / (slidingDistance);
-
-        Drawable drawable = ivBaseTitlebarBg.getDrawable();
-
-        if (drawable == null) {
-            return;
-        }
-        if (scrolledY <= slidingDistance) {
-            // title部分的渐变
-            drawable.mutate().setAlpha((int) (alpha * 255));
-            ivBaseTitlebarBg.setImageDrawable(drawable);
-        } else {
-            drawable.mutate().setAlpha(255);
-            ivBaseTitlebarBg.setImageDrawable(drawable);
-        }
-    }
-
-
-    private void setAdapter(MovieDetailAdapter mAdapter) {
+    private void setAdapter(MovieDetailBean movieDetailBean) {
         rvCast.setVisibility(View.VISIBLE);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(MovieDetailActivity.this);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvCast.setLayoutManager(mLayoutManager);
 
@@ -440,15 +230,10 @@ public class MovieDetailActivity extends BaseHeaderActivity {
         rvCast.setNestedScrollingEnabled(false);
         rvCast.setHasFixedSize(false);
 
+        MovieDetailAdapter mAdapter = new MovieDetailAdapter();
+        mAdapter.addAll(movieDetailBean.getDirectors());
+        mAdapter.addAll(movieDetailBean.getCasts());
         rvCast.setAdapter(mAdapter);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (!subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
     }
 
 
