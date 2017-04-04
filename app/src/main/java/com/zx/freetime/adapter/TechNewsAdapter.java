@@ -41,7 +41,7 @@ public class TechNewsAdapter extends RecyclerView.Adapter<TechNewsAdapter.TechNe
 
     @Override
     public void onBindViewHolder(TechNewsHolder holder, int position) {
-        AndroidNewsBean.ResultBean bean = mItems.get(position);
+        final AndroidNewsBean.ResultBean bean = mItems.get(position);
         if (bean.getImages() != null
                 && bean.getImages().size() > 0
                 && !TextUtils.isEmpty(bean.getImages().get(0))) {
@@ -61,9 +61,10 @@ public class TechNewsAdapter extends RecyclerView.Adapter<TechNewsAdapter.TechNe
         holder.news_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
+                /*Intent intent = new Intent(mContext, WebViewActivity.class);
                 intent.putExtra("url", url);
-                mContext.startActivity(intent);
+                mContext.startActivity(intent);*/
+                WebViewActivity.loadUrl(v.getContext(), bean.getUrl(), "加载中...");
             }
         });
     }
