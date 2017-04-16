@@ -3,12 +3,15 @@ package com.zx.freetime.ui.news.top.detail;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.text.Editable;
 import android.text.Html;
+import android.transition.Transition;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,11 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zx.freetime.R;
 import com.zx.freetime.base.BaseHeaderActivity;
-import com.zx.freetime.bean.movie.SubjectsBean;
 import com.zx.freetime.bean.topnews.TopNewsItem;
-import com.zx.freetime.ui.news.movie.detail.MovieDetailActivity;
-import com.zx.freetime.utils.CommonUtils;
-import com.zx.freetime.utils.StringFormatUtil;
 
 import org.xml.sax.XMLReader;
 
@@ -56,6 +55,44 @@ public class TopNewsDetailActivity extends BaseHeaderActivity {
         setTitle(item.getTitle());
 
         loadTopNewsDetail();
+
+        //拿到进场动画,并添加一个监听器,注意此时动画还没有开始呢,你自己添加了监听器,动画开始结束都在你的掌控中
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().getEnterTransition().addListener(new Transition.TransitionListener() {
+
+                @Override
+                public void onTransitionStart(Transition transition) {
+                }
+
+                @Override
+                public void onTransitionEnd(Transition transition) {
+                    //动画结束后,立即移除动画,防止内存泄露?
+                    getWindow().getEnterTransition().removeListener(this);
+                    Glide.with(TopNewsDetailActivity.this)
+
+                            .load(item.getThumbnail_pic_s())
+                            .crossFade(500)  //淡入淡出
+//                            .asBitmap()
+                            .centerCrop()
+                            .dontAnimate()
+                            .placeholder(R.drawable.img_default_meizi)
+                            .into(imgTopNewsDetail);
+
+                }
+
+                @Override
+                public void onTransitionCancel(Transition transition) {
+                }
+
+                @Override
+                public void onTransitionPause(Transition transition) {
+                }
+
+                @Override
+                public void onTransitionResume(Transition transition) {
+                }
+            });
+        }
     }
 
     private void loadTopNewsDetail() {
@@ -155,25 +192,73 @@ public class TopNewsDetailActivity extends BaseHeaderActivity {
 
     private void initHeader() {
         //加载电影图片;
-        Glide.with(this)
+/*        Glide.with(this)
                 .load(item.getThumbnail_pic_s())
 //                .crossFade(500)  //淡入淡出
-                /*.override((int) CommonUtils.getDimens(R.dimen.movie_detail_width), (int) CommonUtils.getDimens(R
-                        .dimen.movie_detail_height))*/  //不适应图片大小,而是使用这个尺寸;
+                //.override((int) CommonUtils.getDimens(R.dimen.movie_detail_width), (int) CommonUtils.getDimens(R
+                .dimen.movie_detail_height))  //不适应图片大小,而是使用这个尺寸;
                 .placeholder(R.drawable.img_default_meizi)
                 .error(R.drawable.img_default_meizi)
 //                .centerCrop()
-                .into(imgTopNewsDetail);
+                .into(imgTopNewsDetail);*/
+
+        /*Glide.with(this)
+                .load(item.getThumbnail_pic_s())
+                .asBitmap()
+                .centerCrop()
+                .dontAnimate()
+                .placeholder(R.drawable.img_default_meizi)
+                .into(imgTopNewsDetail);*/
+
+/*        imgTopNewsDetail.post(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(TopNewsDetailActivity.this)
+                        .load(item.getThumbnail_pic_s())
+                        .placeholder(R.drawable.img_default_meizi)
+                        .error(R.drawable.img_default_meizi)
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .into(imgTopNewsDetail);
+            }
+        });*/
 
         Glide.with(this)
                 .load(item.getThumbnail_pic_s())
                 .error(R.drawable.stackblur_default)
+                .dontAnimate()
                 .placeholder(R.drawable.stackblur_default)
-                .crossFade(500)
+                // .crossFade(500)
                 .bitmapTransform(new BlurTransformation(this, 23, 4))
                 .into(imgItemBg);
+    }
+
+/*
+
+    @Override
+    public void initNestedScrollView(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        //System.out.println("现在再新闻详情页," + v.toString());
+
+        v.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+                System.out.println("横向" + v.computeHorizontalScrollOffset());
+                System.out.println("纵向" + v.computeVerticalScrollOffset());
+
+                System.out.println(oldScrollY + "-->" + scrollY);
+
+                if (v.computeVerticalScrollOffset() == 0 && oldScrollY > scrollY) { //新的值越来越小,向上
+
+                } else if (v.computeVerticalScrollOffset() == 0 && oldScrollY < scrollY) {  //新的值越来越大,向下
+                    View contentView = v.getChildAt(0);
+                    //contentView.getMeasuredHeight() <= v.getScrollY() + v.getHeight();
+                }
+            }
+        });
+
 
     }
+*/
 
     /**
      * @param context      activity

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,6 @@ public abstract class BaseHeaderActivity extends AppCompatActivity {
 
 
 
-
     //    private ImageView imgItemBg;
     private Toolbar tbBaseTitle;
     private ImageView ivBaseTitlebarBg;
@@ -56,7 +56,6 @@ public abstract class BaseHeaderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_header);
-
 
         titleView = getLayoutInflater().inflate(R.layout.base_header_title_bar, null, false);
         headerView = getLayoutInflater().inflate(getHeaderLayout(), null, false);
@@ -100,8 +99,6 @@ public abstract class BaseHeaderActivity extends AppCompatActivity {
         setToolBar();
 
 
-
-
         // 加载动画
         mAnimationDrawable = (AnimationDrawable) img.getDrawable();
         // 默认进入页面就开启动画
@@ -117,6 +114,9 @@ public abstract class BaseHeaderActivity extends AppCompatActivity {
             }
         });
         contentView.setVisibility(View.GONE);
+    }
+
+    public void initNestedScrollView(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
     }
 
     protected abstract void initHeaderView(View headerView);
@@ -224,6 +224,7 @@ public abstract class BaseHeaderActivity extends AppCompatActivity {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 scrollChangeHeader(scrollY);
+                initNestedScrollView(v, scrollX, scrollY, oldScrollX, oldScrollY);
             }
         });
     }

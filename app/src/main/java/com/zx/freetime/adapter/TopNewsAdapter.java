@@ -54,7 +54,7 @@ public class TopNewsAdapter extends RecyclerView.Adapter<TopNewsAdapter.TopNewsH
         holder.sourceTextview.setText(bean.getAuthor_name());
         Glide.with(mContext)
                 .load(bean.getThumbnail_pic_s())
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(holder.imageView);
 
         final String url = bean.getUrl();//这个才是详情页...
@@ -68,11 +68,13 @@ public class TopNewsAdapter extends RecyclerView.Adapter<TopNewsAdapter.TopNewsH
         holder.topNewsItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(mContext, WebViewActivity.class);
-                intent.putExtra("url", url);
+               /* Intent intent = new Intent(mContext, TopNewsDetailActivity.class);
+                //intent.putExtra("url", url);
+                intent.putExtra("bean", bean);
                 mContext.startActivity(intent);*/
 //                WebViewActivity.loadUrl(v.getContext(), url, "加载中...");
                 TopNewsDetailActivity.start(mContext, bean, holder.imageView);
+                // mContext.startActivity(intent);
             }
         });
     }
